@@ -36,13 +36,13 @@
     <div class="modal-content">
         <span class="close">&times;</span>
         <form action="" method="get" name="contact" id="form">
-            <label for="name1">Name:</label> <input type="text" name="name1" value="11" id="name1"><br><br>
+            <label for="name1">Name:</label> <input type="text" name="name1" value="" id="name1"><br><br>
             <label for="surname">Surname:</label><input type="text" name="surname" value="" id="surname"><br><br>
-            <label for="phone">Phone:</label><input type="text" name="phone" value="" id="phone">
+            <label for="phone">Phone:</label><input type="text" name="phone" value="" id="phone"  pattern="^[0-9+-]+$">
                 <a onclick="return addField()" href="#">Add phone</a>
                 <div id="parentId"></div><br>
-            <label for="emale">E-mail:</label><input type="text" name="email" value="" id="emale">
-                <a onclick="return EaddField()" href="#">Add E-male</a>
+            <label for="emale">E-mail:</label><input type="text" name="email" value="" id="emale" pattern="/^\w{1,}@{1,}\w{2,}$/">
+                <a onclick="return EaddField()" href="#">Add E-mail</a>
                 <div id="EparentId"></div><br>
             <input type="button" onclick="valid(document.getElementById('form'))" name="submit" value="Add contact" id="vvod">
         </form>
@@ -51,11 +51,11 @@
 
 <div>
     <div id="form2" class="modal2">
-        <div class="modal-content2">
+        <div class="modal-content2 clearfix">
             <span class="close2">&times;</span> <br>
             <div id="s-cont"></div>
-            <button id="edit">Edit</button>
-            <button id="del">Delit</button>
+            <button id="edit" class="button">Edit</button>
+            <button id="del" class="button" >Delete</button>
         </div>
     </div>
 </div>

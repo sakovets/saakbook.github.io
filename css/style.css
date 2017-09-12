@@ -159,3 +159,11 @@ body{
     padding: 10px;
     border-radius: 5px;
 }
+
+.button{
+    margin: 30px;
+    padding: 7px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 5px;
+}
