@@ -7,6 +7,7 @@ var tmpObj = {};
 var modal = document.getElementById("form1");
 var btn = document.getElementById("add");
 var span = document.getElementsByClassName("close")[0];
+var e = 0;
 
 // Вывод окна ввода контакта
 
@@ -23,11 +24,14 @@ span.onclick = function () {
 
 function valid (fotm) {
     var fail = "false";
+    var vphone = /^\d[\d\(\)\ -]{2,14}\d$/;
+    var vmail = /^[\w]{1}[\w-\.]*@[\w-]+\.[a-z]{2,4}$/i;
     tmpObj.name = document.getElementsByName("name1")[0].value;
-    if(tmpObj.name === "") fail = "You did not enter a name";
+    if(tmpObj.name === "")
+        fail = "You did not enter a name";
     for (var k = 0; k < localStorage.length; k++) {
         var key2 = localStorage.key(k);
-        if(tmpObj.name === key2) {
+        if(tmpObj.name === key2 && e === 0) {
             fail = "This contact name already exists";
             break;
         }
@@ -37,14 +41,20 @@ function valid (fotm) {
     tmpObj.phones1=[];
     for(var i = 0; i<phones.length; i++){
         tmpObj.phones1.push(phones[i].value);
+         if(vphone.test(tmpObj.phones1[i]) === false)
+            fail = "Invalid phone number format";
     }
+    if(tmpObj.phones1[0] === "")
+        fail = "You did not enter a phone.1";
     var emails = document.getElementsByName('email');
     tmpObj.emails1=[];
     for(var j = 0; j<emails.length; j++){
         tmpObj.emails1.push(emails[j].value);
+        if(vmail.test(tmpObj.emails1[j]) === false)
+            fail = "Wrong e-mail format";
     }
 
-    if(fail = "false") {
+    if (fail === "false") {
         localStorage.setItem(tmpObj.name, JSON.stringify(tmpObj));
         alert('Contact ' + tmpObj.name + ' added to memory');
             }
@@ -171,6 +181,7 @@ function see(myKey) {
     bedit.onclick = function () {
         modal.style.display = "block";
         modal2.style.display = "none";
+        e = 1;
         document.getElementsByName("submit")[0].value = "Edit";
         document.getElementsByName("name1")[0].value = returnObj.name;
         document.getElementsByName("surname")[0].value = returnObj.surname;
@@ -185,6 +196,7 @@ function see(myKey) {
             var div2 = document.createElement("div");
             div2.innerHTML = "<input name=\"email\"" + EcurFieldNameId + "\" type=\"text\" value =" + returnObj.emails1[j] + " pattern=\"/^\w{1,}@{1,}\w{2,}$/\"> <a onclick=\"return deleteField(this)\" href=\"#\">[X]</a>";
             document.getElementById("EparentId").appendChild(div2);
+
         }
     }
 
